@@ -6,20 +6,57 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="all.css">
+    <style>
+      #chatheader{
+        background-color: gray;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+      #chatbox{
+        width: 100%;
+      }
+      #btn-chat{
+        background-color: gray;
+      }
+      #chat-input{
+        float:left;
+        width: 70%;
+        margin-right:5%;
+      }
+    </style>
     <title></title>
   </head>
-  <body>
+  <body id="contactbody">
     <div class="card">
-      <div class="card-body">
-        HI!
-        <ul>
-          <li>1</li>
-          <li>2</li>
-          <li>3</li>
-          <li>4</li>
-        </ul>
-      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" id="chatheader">Chat</li>
+      </ul>
+      <ul class="list-group">
+        <li class="list-group-item" id="chatmessage"></li>
+      </ul>
     </div>
+    <div class="input-group mb-3" id="chatbox">
+      <input type="text" class="form-control" placeholder="Message here" aria-label="Recipient's username" aria-describedby="basic-addon2" id="chat-input">
+      <div class="input-group-append">
+      <button class="btn btn-outline-secondary" type="button" id='btn-chat'>Button</button>
     </div>
+</div>
   </body>
+  <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
+  <script src="main.js"></script>
+  <script type="text/javascript">
+    var msgRef = firebase.database().ref('/message/chat-room/');
+    var user = firebase.auth().currentUser;
+
+    msgRef.on('value',function(snapshot){
+      var val = snapshot.val();
+      let list = " ";
+
+      $.each(val,function(i,item){
+        console.log(i,item);
+        list = `${list}<li class="list-group-item">${user.displayName} : ${item.usermessage}</li>`
+      })
+          $('#chatmessage').html(list);
+    });
+  </script>
 </html>

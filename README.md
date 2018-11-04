@@ -40,6 +40,30 @@ This is the source code for the Firebase_WebChat. This app is biding with fireba
   
   -Fifth step(Web Chat)
    (Under structure)
+   
+  -Sixth step(Real Time Contact)
+   Contact page will list the friends in your contact (../user/contact/).
+   Thus, to test this function, uncomment the code 
+   "
+   //make friends
+   // $(document).ready(function(){
+   //     //connect database
+   //       var msgRef = firebase.database().ref('message/contact/');
+   //
+   //       $('#btn-makefriend').on('click',function(){
+   //         //save input
+   //         var Fakefriendname = $('#fakefriendname').val();
+   //         var Fakefreindnumber = $('#fakefriendnumber').val();
+   //         msgRef.push({
+   //           FriendName:Fakefriendname,
+   //           FreindNumber:Fakefreindnumber,
+   //         });
+   //         console.log('Congrats!You make had made a friend~')
+   //       });
+   //     });
+   "
+   in main.js
+   Then, you can add friend and it will show on your contact page.
   
   
    

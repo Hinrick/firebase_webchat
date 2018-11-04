@@ -37,5 +37,31 @@
     </div>
   </body>
   <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
+  <script>
+  // TODO profile for new user should be "push", for older user should be "update"!
+  // Push profile data to firebase db
+  $(document).ready(function(){
+    //connect database
+      var msgRef = firebase.database().ref('/message/');
+
+      $('#btn-profile').on('click',function(){
+        //save input
+        var Profileusername = $('#profileusername').val();
+        var Profilefirstname = $('#profilefirstname').val();
+        var Profilelastname = $('#profilelastname').val();
+        var Profileemail = $('#profileremail').val();
+        msgRef.update({
+          Username:Profileusername,
+          Firstname:Profilefirstname,
+          Lastname:Profilelastname,
+          Email:Profileemail,
+          //TODO for ADD fried funciton
+          contact:" ",
+        });
+        location.href="profile.html"
+      });
+      //Push data to profile
+    });
+  </script>
   <script src="main.js"></script>
 </html>

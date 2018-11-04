@@ -19,13 +19,14 @@
       <hr class="my-4">
       <p class="lead">Email:<sapn id="changable-email">123</span></p>
       <p class="lead">
-      <a class="btn btn-primary btn-lg" href="reprofile.html" role="button">Edit Profile</a>
+      <a class="btn btn-primary btn-lg" href="reprofile.html" role="button">Edite Profile</a>
       </p>
     </div>
     <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
     <script src="main.js"></script>
     <script type="text/javascript">
       var msgRef = firebase.database().ref('/message/');
+      var user = firebase.auth().currentUser;
       msgRef.on('value',function(snapshot){
         const profilesnap = snapshotToArray(snapshot);
         console.log(profilesnap);
@@ -34,35 +35,10 @@
         document.getElementById("changable-lastname").innerHTML = profilesnap[1];
         document.getElementById("changable-email").innerHTML = profilesnap[0];
       });
-      // TODO profile for new user should be "push", for older user should be "update"!
-      // Push profile data to firebase db
-      $(document).ready(function(){
-        //connect database
-          var msgRef = firebase.database().ref('/message/');
 
-          $('#btn-profile').on('click',function(){
-            //save input
-            var Profileusername = $('#profileusername').val();
-            var Profilefirstname = $('#profilefirstname').val();
-            var Profilelastname = $('#profilelastname').val();
-            var Profileemail = $('#profileremail').val();
-            msgRef.update({
-              Username:Profileusername,
-              Firstname:Profilefirstname,
-              Lastname:Profilelastname,
-              Email:Profileemail,
-              //TODO for ADD fried funciton
-              contact:" ",
-            });
-            user.updateProfile({
-              displyName:profileusername,
-              email:Profileemail,
-            });
-            console.log(user);
-            //location.href="profile.html"
-          });
+      //user.updateProfile(){
 
-        });
+      }
     </script>
   </body>
 </html>

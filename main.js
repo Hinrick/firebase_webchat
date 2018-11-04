@@ -1,11 +1,11 @@
 // Initialize Firebase
 var config = {
-  apiKey: "",
-  authDomain: "",
-  databaseURL: "",
-  projectId: "",
-  storageBucket: "",
-  messagingSenderId: ""
+  apiKey: "AIzaSyBPKMIHAJYx5NDRKYf9Tj2uwr-e20KUzBY",
+  authDomain: "tengichat.firebaseapp.com",
+  databaseURL: "https://tengichat.firebaseio.com",
+  projectId: "tengichat",
+  storageBucket: "tengichat.appspot.com",
+  messagingSenderId: "147637467747"
 };
 
 firebase.initializeApp(config);
@@ -17,9 +17,8 @@ firebase.initializeApp(config);
 //     console.log(switchindex);
 //   };
 
-/*** Handles the sign in button press.*/
+/*** Handles the button press.*/
 
-//SignIn
 const  txtEmail = document.getElementById('email');
 const  txtPass = document.getElementById('password');
 const  profileUserName = document.getElementById('profileusername');
@@ -31,63 +30,73 @@ const  btnSignUp = document.getElementById('quickstart-sign-up');
 const  btnProfile = document.getElementById('btn-profile');
 
 //make friends
-// $(document).ready(function(){
-//     //connect database
-//       var msgRef = firebase.database().ref('message/contact/');
-//
-//       $('#btn-makefriend').on('click',function(){
-//         //save input
-//         var Fakefriendname = $('#fakefriendname').val();
-//         var Fakefreindnumber = $('#fakefriendnumber').val();
-//         msgRef.push({
-//           FriendName:Fakefriendname,
-//           FreindNumber:Fakefreindnumber,
-//         });
-//         console.log('Congrats!You make had made a friend~')
-//       });
-//     });
+$(document).ready(function(){
+    //connect database
+      var msgRef = firebase.database().ref('message/contact/');
 
-//Sign In
-window.onload=function(){
-  btnSignin.addEventListener('click',e=>{
-    e.preventDefault();
-    //get email, Password
-    const email = txtEmail.value;
-    const password = txtPass.value;
-    const auth = firebase.auth();
-    //SignIn
-    const promise = auth.signInWithEmailAndPassword(email, password);
-    promise.catch(e=>console.log(e.message));
+      $('#btn-makefriend').on('click',function(){
+        //save input
+        var Fakefriendname = $('#fakefriendname').val();
+        var Fakefreindnumber = $('#fakefriendnumber').val();
+        msgRef.push({
+          FriendName:Fakefriendname,
+          FreindNumber:Fakefreindnumber,
+        });
+        console.log('Congrats!You make had made a friend~')
+      });
+    });
 
-    var firebaseUser = firebase.auth().currentUser;
-    console.log(firebaseUser.email);
 
-  })
-}
+// function onChanges(){
+//   firebase.auth().onAuthStateChanged(firebaseUser=>{
+//     if (firebaseUser) {
+//       console.log(email,password);
+//     } else {
+//       console.log("Hello World");
+//     }
+//   });
+//}
+//SignIn
+btnSignin.addEventListener('click',e=>{
+  e.preventDefault();
+  //get email, Password
+  const email = txtEmail.value;
+  const password = txtPass.value;
+  const auth = firebase.auth();
+  //SignIn
+  const promise = auth.signInWithEmailAndPassword(email, password);
+  promise.catch(e=>console.log(e.message));
 
+  var user = firebase.auth().currentUser;
+
+  if(user){
+    location.href="chat.html";
+  }else{
+    console.log("You have wrong userID ot password!");
+  }
+
+})
 
 //Sign Up
-window.onload=function(){
-  btnSignUp.addEventListener('click',e=>{
-    e.preventDefault();
-    //get email, Password
-    const email = txtEmail.value;
-    const password = txtPass.value;
-    const auth = firebase.auth();
-    //SignUp
-    const promise = auth.createUserWithEmailAndPassword(email, password);
-    promise.catch(e=>console.log(e.message));
+btnSignUp.addEventListener('click',e=>{
+  e.preventDefault();
+  //get email, Password
+  const email = txtEmail.value;
+  const password = txtPass.value;
+  const auth = firebase.auth();
+  //SignUp
+  const promise = auth.createUserWithEmailAndPassword(email, password);
+  promise.catch(e=>console.log(e.message));
 
-    user = firebase.auth().currentUser;
+  var user = firebase.auth().currentUser;
 
-    if(user){
-      location.href="reprofile.html"
-    }else{
+  if(user){
+    location.href = "reprofile.html";
+  }else{
+    console.log("You have wrong userID ot password!")
+  }
 
-    }
-
-  })
-}
+})
 
 //snapshotToArray
 function snapshotToArray(snapshot) {
@@ -102,7 +111,6 @@ function snapshotToArray(snapshot) {
 
     return returnArr;
 };
-
 
 
 //
@@ -126,6 +134,21 @@ function snapshotToArray(snapshot) {
 //
 //     });
 //
-//TODO solve the problem
+
 //   switchindex = "";
 // })
+
+
+  //
+  // var Printmsg = firebase.database().ref('1/message')
+  // Printmsg.once('value').then(function(snapshot){
+  //   var msg = snapshot.child("messsage").val();
+  //   console.log(msg);
+  // });
+
+    //go on windows
+
+
+
+
+//Print on the chatweb

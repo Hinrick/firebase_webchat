@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="all.css">
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="jumbotron">
+      <h1 class="display-4">Profile</h1>
+      <p class="profilephoto"></p>
+      <p class="lead"><sapn id="changable-username">123</span></p>
+      <hr class="my-4">
+      <p class="lead">First Name:<sapn id="changable-firstname">123</span></p>
+      <hr class="my-4">
+      <p class="lead">Las Name:<sapn id="changable-lastname">123</span></p>
+      <hr class="my-4">
+      <p class="lead">Email:<sapn id="changable-email">123</span></p>
+      <p class="lead">
+      <a class="btn btn-primary btn-lg" href="reprofile.html" role="button">Edit Profile</a>
+      </p>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
+    <script src="main.js"></script>
+    <script type="text/javascript">
+      var msgRef = firebase.database().ref('/message/');
+      msgRef.on('value',function(snapshot){
+        const profilesnap = snapshotToArray(snapshot);
+        console.log(profilesnap);
+        document.getElementById("changable-username").innerHTML = profilesnap[3];
+        document.getElementById("changable-firstname").innerHTML = profilesnap[2];
+        document.getElementById("changable-lastname").innerHTML = profilesnap[1];
+        document.getElementById("changable-email").innerHTML = profilesnap[0];
+      });
+      // TODO profile for new user should be "push", for older user should be "update"!
+      // Push profile data to firebase db
+      $(document).ready(function(){
+        //connect database
+          var msgRef = firebase.database().ref('/message/');
+
+          $('#btn-profile').on('click',function(){
+            //save input
+            var Profileusername = $('#profileusername').val();
+            var Profilefirstname = $('#profilefirstname').val();
+            var Profilelastname = $('#profilelastname').val();
+            var Profileemail = $('#profileremail').val();
+            msgRef.update({
+              Username:Profileusername,
+              Firstname:Profilefirstname,
+              Lastname:Profilelastname,
+              Email:Profileemail,
+              //TODO for ADD fried funciton
+              contact:" ",
+            });
+            user.updateProfile({
+              displyName:profileusername,
+              email:Profileemail,
+            });
+            console.log(user);
+            //location.href="profile.html"
+          });
+
+        });
+    </script>
+  </body>
+</html>

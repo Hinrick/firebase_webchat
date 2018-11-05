@@ -1,11 +1,11 @@
 // Initialize Firebase
 var config = {
-  apiKey: "AIzaSyBPKMIHAJYx5NDRKYf9Tj2uwr-e20KUzBY",
-  authDomain: "tengichat.firebaseapp.com",
-  databaseURL: "https://tengichat.firebaseio.com",
-  projectId: "tengichat",
-  storageBucket: "tengichat.appspot.com",
-  messagingSenderId: "147637467747"
+  apiKey: "",
+  authDomain: "",
+  databaseURL: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: ""
 };
 
 firebase.initializeApp(config);
